@@ -57,7 +57,16 @@ function md5.sumhexa(msg)
     return string.format("%08x%08x%08x%08x", a0, b0, c0, d0)
 end
 
--- Example usage:
-local input = "Hello, World!"
-local hash = md5.sumhexa(input)
-print("MD5 hash of '" .. input .. "' is: " .. hash)
+-- Function to read a file and return its contents
+local function read_file(filename)
+    local file = assert(io.open(filename, "rb"))
+    local content = file:read("*all")
+    file:close()
+    return content
+end
+
+-- Example usage to read a file and compute its MD5 hash
+local filename = "example.txt"  -- Replace with your file name
+local file_content = read_file(filename)
+local file_hash = md5.sumhexa(file_content)
+print("MD5 hash of file '" .. filename .. "' is: " .. file_hash)
